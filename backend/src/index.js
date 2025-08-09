@@ -24,15 +24,21 @@ const __dirname = path.resolve();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://real-time-chatty-application.netlify.app",
-  "https://real-time-chatty-application.onrender.com"
+  "https://real-time-chatty-application.netlify.app"
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: (origin, callback) => {
+    // allow server-to-server tools or same-origin requests with no origin
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error("Not allowed by CORS"));
+  },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization"]
 }));
 
 app.use(express.json());
