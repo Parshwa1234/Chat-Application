@@ -10,4 +10,7 @@ console.log('Final API_URL:', API_URL);
 export const axiosInstance = axios.create({
   baseURL: API_URL,
   withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
