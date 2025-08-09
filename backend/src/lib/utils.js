@@ -15,7 +15,7 @@ export const generateToken = (userId, res) => {
     res.cookie("jwt", token, {
       httpOnly: true, // Prevent JS access to cookie
       secure: process.env.NODE_ENV === "production", // True only in HTTPS
-      sameSite: "none", // Must be "none" for cross-site requests
+      sameSite: "lax", // Must be "none" for cross-site requests
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
