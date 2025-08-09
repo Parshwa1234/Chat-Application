@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 
 let io;
+const userSocketMap = {}; // ✅ move here
 
 export function initializeSocket(server) {
   io = new Server(server, {
@@ -14,16 +15,12 @@ export function initializeSocket(server) {
     },
   });
 
-  // used to store online users
-  const userSocketMap = {}; // {userId: socketId}
-
   io.on("connection", (socket) => {
     console.log("A user connected", socket.id);
 
     const userId = socket.handshake.query.userId;
     if (userId) userSocketMap[userId] = socket.id;
 
-    // io.emit() is used to send events to all the connected clients
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
     socket.on("disconnect", () => {
@@ -35,7 +32,7 @@ export function initializeSocket(server) {
 }
 
 export function getReceiverSocketId(userId) {
-  return userSocketMap[userId];
+  return userSocketMap[userId] || null; // ✅ Now works
 }
 
 export { io };
