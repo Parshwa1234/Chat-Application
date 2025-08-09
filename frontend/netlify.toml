@@ -1,10 +1,10 @@
 [build]
-  publish = "dist"
+  publish = "frontend/dist"            # ✅ point to frontend build output
   command = "npm run build"
 
 [build.environment]
   NODE_VERSION = "18"
-  VITE_API_URL = "https://real-time-chatty-application.onrender.com/api"
+  VITE_API_URL = "https://real-time-chatty-application.onrender.com/api"  # ✅ available to Vite during build
 
 [[redirects]]
   from = "/*"
@@ -12,6 +12,6 @@
   status = 200
 
 [dev]
-  command = "npm run dev"
+  command = "npm run dev --prefix frontend"
   port = 5173
-  publish = "dist"
+  publish = "frontend/dist"
