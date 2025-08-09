@@ -8,7 +8,14 @@ import path from "path";
 import { connectdb } from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
-import { app, server } from "./lib/socket.js";
+import { initializeSocket } from "./lib/socket.js";
+import http from "http";
+
+const app = express();
+const server = http.createServer(app);
+
+// Initialize Socket.IO
+initializeSocket(server);
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
@@ -24,8 +31,14 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: true, // Allow all origins temporarily for debugging
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://real-time-chatty-application.netlify.app"
+  ],
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
 }));
 app.use(express.json());
 app.use(cookieParser()); 
