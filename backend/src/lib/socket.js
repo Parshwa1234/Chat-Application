@@ -10,8 +10,7 @@ export function initializeSocket(server) {
         "http://localhost:5173",
         "http://localhost:3000",
         "https://real-time-chatty-application.netlify.app",
-        "https://real-time-chatty-application.onrender.com/",
-        "https://real-time-chatty-application.onrender.com/api",
+        "https://real-time-chatty-application.onrender.com",
       ],
       credentials: true
     },
