@@ -7,7 +7,8 @@ export function initializeSocket(server) {
     cors: {
       origin: [
         "http://localhost:5173",
-        "https://real-time-chatty-application.netlify.app"
+        "https://real-time-chatty-application.netlify.app",
+        "https://real-time-chatty-application.onrender.com"
       ],
       credentials: true
     },
