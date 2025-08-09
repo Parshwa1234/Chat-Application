@@ -40,7 +40,7 @@ FRONTEND_URL=https://real-time-chatty-application.netlify.app
 In your Netlify dashboard → Site settings → Environment variables, add:
 
 ```
-VITE_API_URL=https://chat-application-tt11.onrender.com/api
+VITE_API_URL=https://real-time-chatty-application.onrender.com/api
 ```
 
 **Replace `your-backend-name` with your actual Render backend URL once deployed.**
@@ -48,7 +48,7 @@ VITE_API_URL=https://chat-application-tt11.onrender.com/api
 ### 4. Test Your Application
 
 1. Visit: https://real-time-chatty-application.netlify.app
-2. Test backend health: `https://chat-application-tt11.onrender.com/health`
+2. Test backend health: `https://real-time-chatty-application.onrender.com/health`
 3. Try logging in/registering
 
 ## That's It! 
