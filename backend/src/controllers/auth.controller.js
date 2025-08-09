@@ -60,7 +60,12 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        generateToken(user._id, res);
+        const token = generateToken(user._id, res);
+        
+        console.log('=== LOGIN DEBUG ===');
+        console.log('User logged in:', user.email);
+        console.log('Token generated:', token);
+        console.log('Response headers:', res.getHeaders());
 
         res.status(200).json({
             _id: user._id,
