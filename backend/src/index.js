@@ -19,19 +19,12 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
   "https://real-time-chatty-application.netlify.app", // Your actual Netlify URL
+  "https://real-time-chatty-application.netlify.app/", // With trailing slash
+  "https://real-time-chatty-application.netlify.app/*", // Wildcard
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: true, // Allow all origins temporarily for debugging
   credentials: true,
 }));
 app.use(express.json());
