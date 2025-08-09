@@ -2,9 +2,7 @@
 import axios from "axios";
 
 // Prefer environment variable, fallback to default
-const API_URL =
-  import.meta.env.VITE_API_URL ||
-  "https://real-time-chatty-application.onrender.com/api";
+const API_URL ="http://localhost:3000/api";
 
 console.log("Environment variables:", import.meta.env);
 console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
