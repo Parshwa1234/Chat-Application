@@ -28,13 +28,15 @@ const allowedOrigins = [
   "https://real-time-chatty-application.netlify.app", // Your actual Netlify URL
   "https://real-time-chatty-application.netlify.app/", // With trailing slash
   "https://real-time-chatty-application.netlify.app/*", // Wildcard
+  "https://real-time-chatty-application.onrender.com/",
 ];
 
 app.use(cors({
   origin: [
     "http://localhost:5173",
     "http://localhost:3000",
-    "https://real-time-chatty-application.netlify.app"
+    "https://real-time-chatty-application.netlify.app",
+    "https://real-time-chatty-application.onrender.com/",
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
