@@ -1,7 +1,10 @@
 import toast from "react-hot-toast";
 import { create } from "zustand";
-import { axiosInstance } from "../lib/axios"; // path fixed if needed
+import { axiosInstance } from "../lib/axios";
 import { useAuthStore } from "./useAuthStore";
+
+// Make sure axiosInstance is configured to send cookies
+axiosInstance.defaults.withCredentials = true;
 
 export const useChatStore = create((set, get) => ({
   messages: [],
