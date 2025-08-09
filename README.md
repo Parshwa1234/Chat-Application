@@ -1,4 +1,6 @@
-Live link of Chat Application uploaded on Render :- https://real-time-chatty-application.netlify.app/
+Live link of Chat Application uploaded on Netlify (backend-render) :- https://real-time-chatty-application.netlify.app/
+
+Live Link Of Chat Application on Render:- https://real-time-chatty-application.onrender.com/
 
 
 
