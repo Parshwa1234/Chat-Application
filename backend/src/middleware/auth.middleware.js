@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
 export const protectRoute = async (req, res, next) => {
@@ -17,19 +16,20 @@ export const protectRoute = async (req, res, next) => {
       return res.status(401).json({ message: "Unauthorized - No Token Provided" });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // Skip JWT verification completely here
+    
+    // Optionally, you can try to decode the token without verifying
+    // or just let the user pass without validating token content
 
-    if (!decoded) {
-      return res.status(401).json({ message: "Unauthorized - Invalid Token" });
-    }
+    // For example, if you want to get user ID without verifying signature (not secure):
+    // const decoded = jwt.decode(token);
+    // const user = await User.findById(decoded.userId).select("-password");
 
-    const user = await User.findById(decoded.userId).select("-password");
+    // Or just assign user as null or skip altogether
+    // Here we will just let the request pass with no user info
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    req.user = user;
+    // If you want to attach some user data anyway (unsafe), you can do so here.
+    // Otherwise, just call next()
 
     next();
   } catch (error) {
