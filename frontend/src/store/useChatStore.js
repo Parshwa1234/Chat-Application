@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { create } from "zustand";
-import { axiosInstance } from "../utils/axios"; // path fixed if needed
+import { axiosInstance } from "../lib/axios"; // path fixed if needed
 import { useAuthStore } from "./useAuthStore";
 
 export const useChatStore = create((set, get) => ({
