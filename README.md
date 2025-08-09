@@ -1,1 +1,1 @@
-Live link of Chat Application uploaded on Render :- https://chat-application-tt11.onrender.com/
+Live link of Chat Application uploaded on Render :- https://real-time-chatty-application.netlify.app/
