@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 const MessageInput = () => {
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
+  const [isSending, setIsSending] = useState(false); // NEW
   const fileInputRef = useRef(null);
   const { sendMessage } = useChatStore();
 
@@ -30,20 +31,24 @@ const MessageInput = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!text.trim() && !imagePreview) return;
+    if (isSending || (!text.trim() && !imagePreview)) return;
 
+    setIsSending(true); // lock send
     try {
       await sendMessage({
         text: text.trim(),
         image: imagePreview,
       });
 
-      // Clear form
+      // Reset input states
       setText("");
       setImagePreview(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
       console.error("Failed to send message:", error);
+      toast.error("Failed to send message. Try again.");
+    } finally {
+      setIsSending(false); // unlock send
     }
   };
 
@@ -59,8 +64,7 @@ const MessageInput = () => {
             />
             <button
               onClick={removeImage}
-              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-base-300
-              flex items-center justify-center"
+              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-base-300 flex items-center justify-center"
               type="button"
             >
               <X className="size-3" />
@@ -88,8 +92,9 @@ const MessageInput = () => {
 
           <button
             type="button"
-            className={`hidden sm:flex btn btn-circle
-                     ${imagePreview ? "text-emerald-500" : "text-zinc-400"}`}
+            className={`hidden sm:flex btn btn-circle ${
+              imagePreview ? "text-emerald-500" : "text-zinc-400"
+            }`}
             onClick={() => fileInputRef.current?.click()}
           >
             <Image size={20} />
@@ -98,7 +103,7 @@ const MessageInput = () => {
         <button
           type="submit"
           className="btn btn-sm btn-circle"
-          disabled={!text.trim() && !imagePreview}
+          disabled={isSending || (!text.trim() && !imagePreview)} // disable while sending
         >
           <Send size={22} />
         </button>
@@ -106,4 +111,5 @@ const MessageInput = () => {
     </div>
   );
 };
+
 export default MessageInput;
